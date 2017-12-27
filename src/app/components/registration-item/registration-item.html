@@ -1,0 +1,22 @@
+<mat-card>
+    <mat-card-title-group>
+        <mat-card-title>{{item.registration.name}}</mat-card-title>
+        <mat-card-subtitle>{{item.registration.appId}}</mat-card-subtitle>
+    </mat-card-title-group>
+    <mat-card-content>
+        <span>
+            <mat-icon>lightbulb_outline
+            </mat-icon>
+        </span>
+        <span *ngIf="item.exceptions">
+            Exceptions: {{item.exceptions.exceptionsCount}}
+        </span>
+        <span *ngIf="!item.exceptions">
+            Exceptions: N/A
+        </span>
+    </mat-card-content>
+    <mat-card-actions>
+            <button mat-button color="accent">EXPLORE</button>
+            <button mat-button color="warn">REMOVE</button>
+    </mat-card-actions>
+</mat-card>
