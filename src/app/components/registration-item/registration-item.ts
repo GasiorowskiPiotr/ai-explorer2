@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { ILogListRegistration, IExceptionEntry } from '../../state';
 
 @Component({
@@ -10,4 +10,10 @@ import { ILogListRegistration, IExceptionEntry } from '../../state';
 export class RegistrationItemComponent {
 
     @Input() public item: {registration: ILogListRegistration, exceptions: IExceptionEntry};
+
+    @Output() public removeRequested: EventEmitter<string> = new EventEmitter();
+
+    public remove() {
+        this.removeRequested.next(this.item.registration.appId);
+    }
 }

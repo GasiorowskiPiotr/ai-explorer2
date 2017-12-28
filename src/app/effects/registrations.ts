@@ -7,8 +7,8 @@ import { Effect, Actions } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { COMMAND_TYPES, LoadAiAppsCommand, RegisterAiAppCommand } from '../actions/registrations/commands';
-import { aiAppsLoaded, aiAppRegistered } from '../actions/registrations/events';
+import { COMMAND_TYPES, LoadAiAppsCommand, RegisterAiAppCommand, RemoveAiAppCommand } from '../actions/registrations/commands';
+import { aiAppsLoaded, aiAppRegistered, aiAppRemoved } from '../actions/registrations/events';
 
 import { IRegistrationService, REGISTRATION_SERVICE } from '../services/registrations';
 import { ILogListRegistration } from '../state/index';
@@ -30,6 +30,12 @@ export class RegistrationsEffects {
                 loadExceptions: action.loadExceptions,
                 name: action.name
             }).map((reg: ILogListRegistration) => aiAppRegistered(action.name, action.appId, action.appKey, action.loadExceptions))
+        );
+
+    @Effect() remove$: Observable<Action> =
+        this.actions$.ofType(COMMAND_TYPES.REMOVE_AI_APP)
+            .mergeMap((action: RemoveAiAppCommand) => 
+                this.registrationsService.remove(action.appId).map(() => aiAppRemoved(action.appId))
         );
 
     constructor(

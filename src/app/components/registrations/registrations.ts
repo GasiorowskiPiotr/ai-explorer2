@@ -5,6 +5,7 @@ import 'rxjs/add/observable/combineLatest';
 import { Observable } from 'rxjs/Observable';
 
 import { IApplicationState, ILogListRegistration, IExceptionEntry } from '../../state';
+import { removeAiApp } from '../../actions/registrations/commands'
 
 @Component({
     selector: 'registrations',
@@ -23,7 +24,7 @@ export class RegistrationsComponent implements OnInit {
         const exceptions = this.store.select(s => s.exceptions);
 
         Observable.combineLatest(registrations, exceptions, (regs, excs) => ([
-            ...(regs || []).map((reg) => ({
+            ...regs.map((reg) => ({
                 registration: reg,
                 exceptions: (excs || []).find((e) => e.appId === reg.appId)
             }))
@@ -31,6 +32,12 @@ export class RegistrationsComponent implements OnInit {
             this.registrations = res;
         });
         
+    }
+
+    onRemoveAppRequested($event: string) {
+        const appId = $event;
+
+        this.store.dispatch(removeAiApp(appId));
     }
 
 }
