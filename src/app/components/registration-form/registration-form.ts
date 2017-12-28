@@ -12,7 +12,7 @@ export class RegistrationFormComponent {
     
     @Output() public registrationRequested: EventEmitter<ILogListRegistration> = new EventEmitter();
 
-    private form: FormGroup;
+    public form: FormGroup;
 
     constructor(private formBuilder: FormBuilder) {
         this.form = this.formBuilder.group({

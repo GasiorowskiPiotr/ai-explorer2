@@ -13,7 +13,7 @@ import { IApplicationState, ILogListRegistration, IExceptionEntry } from '../../
 })
 export class RegistrationsComponent implements OnInit {
     
-    private registrations: {registration: ILogListRegistration, exceptions: IExceptionEntry}[] = [];
+    public registrations: {registration: ILogListRegistration, exceptions: IExceptionEntry}[] = [];
 
     constructor(private store: Store<IApplicationState>) {
     }
