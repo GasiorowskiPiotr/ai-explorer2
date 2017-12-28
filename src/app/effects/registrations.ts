@@ -7,10 +7,11 @@ import { Effect, Actions } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { COMMAND_TYPES, LoadAiAppsCommand } from '../actions/registrations/commands';
-import { aiAppsLoaded } from '../actions/registrations/events';
+import { COMMAND_TYPES, LoadAiAppsCommand, RegisterAiAppCommand } from '../actions/registrations/commands';
+import { aiAppsLoaded, aiAppRegistered } from '../actions/registrations/events';
 
 import { IRegistrationService, REGISTRATION_SERVICE } from '../services/registrations';
+import { ILogListRegistration } from '../state/index';
 
 @Injectable()
 export class RegistrationsEffects {
@@ -20,6 +21,16 @@ export class RegistrationsEffects {
             .mergeMap((action: LoadAiAppsCommand) => 
                 this.registrationsService.getAll().map(aiAppsLoaded));
 
+
+    @Effect() register$: Observable<Action> = 
+        this.actions$.ofType(COMMAND_TYPES.REGISTER_AI_APP)
+            .mergeMap((action: RegisterAiAppCommand) => this.registrationsService.register({
+                appId: action.appId,
+                appKey: action.appKey,
+                loadExceptions: action.loadExceptions,
+                name: action.name
+            }).map((reg: ILogListRegistration) => aiAppRegistered(action.name, action.appId, action.appKey, action.loadExceptions))
+        );
 
     constructor(
         private actions$: Actions,

@@ -18,9 +18,12 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
 
     this.store.select(e => e.registrations).subscribe(regs => {
-      var toLoad = regs.filter(r => r.loadExceptions);
 
-      this.store.dispatch(loadExceptions(toLoad));
+      if(regs) {
+        var toLoad = regs.filter(r => r.loadExceptions);
+
+        this.store.dispatch(loadExceptions(toLoad));
+      }
     })
 
     this.store.dispatch(loadAiApps());

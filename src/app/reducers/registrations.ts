@@ -3,7 +3,7 @@ import { ILogListRegistration } from '../state';
 
 import { AiAppRegisteredEvent, AiAppRemovedEvent, AiAppsLoadedEvent, EVENT_TYPES } from '../actions/registrations/events';
 
-export function registrationsReducer(state: ILogListRegistration[] = [], action: Action): ILogListRegistration[] {
+export function registrationsReducer(state: ILogListRegistration[], action: Action): ILogListRegistration[] {
 
     switch(action.type) {
         case EVENT_TYPES.AI_APP_REGISTERED: {

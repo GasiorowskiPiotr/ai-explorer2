@@ -9,7 +9,7 @@ export enum COMMAND_TYPES {
 export class RegisterAiAppCommand implements Action {
     type: string = COMMAND_TYPES.REGISTER_AI_APP;
 
-    constructor(public name: string, public appId: string, public appKey: string) { }
+    constructor(public name: string, public appId: string, public appKey: string, public loadExceptions: boolean) { }
 }
 
 export class RemoveAiAppCommand implements Action {
@@ -25,8 +25,8 @@ export class LoadAiAppsCommand implements Action {
     constructor() {}
 }
 
-export const registerAiApp = (name: string, appId: string, appKey: string) : RegisterAiAppCommand => 
-    new RegisterAiAppCommand(name, appId, appKey);
+export const registerAiApp = (name: string, appId: string, appKey: string, loadExceptions: boolean) : RegisterAiAppCommand => 
+    new RegisterAiAppCommand(name, appId, appKey, loadExceptions);
 
 export const removeAiApp = (appId: string): RemoveAiAppCommand =>
     new RemoveAiAppCommand(appId);

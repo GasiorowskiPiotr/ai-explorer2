@@ -14,7 +14,7 @@ const storageKey = '__APPS__'
 
 export interface IRegistrationService {
 
-    register(app: ILogListRegistration): Observable<{}>;
+    register(app: ILogListRegistration): Observable<ILogListRegistration>;
     remove(appId: string): Observable<{}>;
     getAll(): Observable<ILogListRegistration[]>;
 
@@ -23,14 +23,11 @@ export interface IRegistrationService {
 @Injectable()
 export class RegistrationService implements IRegistrationService {
     getAll = () =>
-        //fromPromise(getItem<ILogListRegistration[]>(storageKey));
-        Observable.of([<ILogListRegistration>{
-            name: 'Piotrek',
-            appId: 'Test',
-            appKey: 'Test'
-        }]);
+        fromPromise(getItem<ILogListRegistration[]>(storageKey).then(res => {
+            return res || [];
+        }));
 
-    register = (app: ILogListRegistration): Observable<{}> =>
+    register = (app: ILogListRegistration): Observable<any> =>
         fromPromise(getItem(storageKey).then((items: ILogListRegistration[]) => {
             const entries = items || [];
             const newEntries = [...entries, app];
