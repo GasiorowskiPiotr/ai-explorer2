@@ -1,2 +1,5 @@
-<registrations-list [items]="registrations" (removeAppRequested)="onRemoveAppRequested($event)"></registrations-list>
+<registrations-list 
+    [items]="registrations" 
+    (removeAppRequested)="onRemoveAppRequested($event)"
+    (exploreLogsRequested)="onExploreLogsRequested($event)"></registrations-list>
 <a mat-fab color="primary" routerLink="register"><mat-icon>add</mat-icon></a>

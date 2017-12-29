@@ -12,8 +12,13 @@ export class RegistrationItemComponent {
     @Input() public item: {registration: ILogListRegistration, exceptions: IExceptionEntry};
 
     @Output() public removeRequested: EventEmitter<string> = new EventEmitter();
+    @Output() public exploreRequested: EventEmitter<string> = new EventEmitter();
 
     public remove() {
         this.removeRequested.next(this.item.registration.appId);
+    }
+
+    public explore() {
+        this.exploreRequested.next(this.item.registration.name);
     }
 }

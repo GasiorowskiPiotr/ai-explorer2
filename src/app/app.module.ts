@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,15 +13,18 @@ import { environment } from '../environments/environment';
 
 // -------- Services
 import { REGISTRATION_SERVICE, RegistrationService } from './services/registrations';
+import { APPLICATION_INSIGHTS_SERVICE, ApplicationInsightsService } from './services/applicationInsigts';
 
 // -------- Effects
 import { EffectsModule } from '@ngrx/effects';
 import { RegistrationsEffects } from './effects/registrations';
+import { LogsEffects } from './effects/logs';
 
 // -------- Store
 import { StoreModule } from '@ngrx/store';
 import { registrationsReducer } from './reducers/registrations';
 import { exceptionsReducer } from './reducers/exceptions';
+import { logsReducer } from './reducers/logs';
 
 // -------- Material modules
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -38,11 +42,12 @@ import { RegistrationsListComponent } from './components/registrations-list';
 import { RegistrationItemComponent } from './components/registration-item';
 import { AiRegistrationComponent } from './components/ai-registration';
 import { RegistrationFormComponent } from './components/registration-form';
+import { LogsComponent } from './components/logs';
 
-const aiExplorerComponent = [RegistrationsComponent, RegistrationsListComponent, RegistrationItemComponent, AiRegistrationComponent, RegistrationFormComponent];
+const aiExplorerComponent = [RegistrationsComponent, RegistrationsListComponent, RegistrationItemComponent, AiRegistrationComponent, RegistrationFormComponent, LogsComponent];
 
 // -------- State
-import { ILogListRegistration, IExceptionEntry } from './state';
+import { ILogListRegistration, IExceptionEntry, ILogList } from './state';
 
 @NgModule({
   declarations: [
@@ -54,23 +59,29 @@ import { ILogListRegistration, IExceptionEntry } from './state';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     AppRoutingModule,
     StoreModule.forRoot({
       registrations: registrationsReducer,
-      exceptions: exceptionsReducer
+      exceptions: exceptionsReducer,
+      lists: logsReducer
     }, {
       initialState: {
         exceptions: new Array<IExceptionEntry>(),
-        registrations: new Array<ILogListRegistration>()
+        registrations: new Array<ILogListRegistration>(),
+        lists: new Array<ILogList>()
       }
     }),
-    EffectsModule.forRoot([RegistrationsEffects]),
+    EffectsModule.forRoot([RegistrationsEffects, LogsEffects]),
     [...materialModules],
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [{
     provide: REGISTRATION_SERVICE,
     useClass: RegistrationService
+  }, {
+    provide: APPLICATION_INSIGHTS_SERVICE,
+    useClass: ApplicationInsightsService
   }],
   bootstrap: [AppComponent]
 })

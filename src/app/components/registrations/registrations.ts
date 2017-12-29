@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import 'rxjs/add/observable/combineLatest';
@@ -16,7 +17,7 @@ export class RegistrationsComponent implements OnInit {
     
     public registrations: {registration: ILogListRegistration, exceptions: IExceptionEntry}[] = [];
 
-    constructor(private store: Store<IApplicationState>) {
+    constructor(private store: Store<IApplicationState>, private router: Router) {
     }
 
     ngOnInit(): void {
@@ -38,6 +39,12 @@ export class RegistrationsComponent implements OnInit {
         const appId = $event;
 
         this.store.dispatch(removeAiApp(appId));
+    }
+
+    onExploreLogsRequested($event: string) {
+        const appName = $event;
+
+        this.router.navigate(['logs', appName]);
     }
 
 }

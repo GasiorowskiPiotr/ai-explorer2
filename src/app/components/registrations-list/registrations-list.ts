@@ -11,11 +11,18 @@ export class RegistrationsListComponent {
     @Input() public items: {registration: ILogListRegistration, exceptions: IExceptionEntry}[] = [];
 
     @Output() public removeAppRequested: EventEmitter<string> = new EventEmitter();
+    @Output() public exploreLogsRequested: EventEmitter<string> = new EventEmitter();
 
     onRemoveRequested($event: string) {
         const appId: string = $event;
 
         this.removeAppRequested.next(appId);
+    }
+
+    onExploreRequested($event: string) {
+        const appName: string = $event;
+
+        this.exploreLogsRequested.next(appName);
     }
 
 }

@@ -1,3 +1,5 @@
-<registration-item *ngFor="let item of items" [item]="item" (removeRequested)="onRemoveRequested($event)" >
+<registration-item *ngFor="let item of items" [item]="item" 
+    (removeRequested)="onRemoveRequested($event)" 
+    (exploreRequested)="onExploreRequested($event)">
 
 </registration-item>
