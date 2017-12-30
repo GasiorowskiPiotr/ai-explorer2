@@ -31,7 +31,7 @@ export interface ILogEntry {
     id: string;
     timestamp: Date;
     operation: { name: string };
-    type: string;
+    type: EntryTypes;
     customDimensions: any;
 }
 
@@ -110,4 +110,15 @@ export enum FilterTimeSpans {
     DAY = 'PT24H',
     HR8 = 'PT8H',
     HR1 = 'PT1H'
+}
+
+export enum EntryTypes {
+    TRACE = 'trace',
+    CUSTOM_EVENT = 'customEvent',
+    PAGE_VIEW = 'pageView',
+    BROWSER_TIMING = 'browserTiming',
+    REQUEST = 'request',
+    DEPENDENCY = 'dependency',
+    EXCEPTION = 'exception',
+    AVAILABILITY_RESULT = 'availabilityResult'
 }

@@ -6,12 +6,15 @@ import { Injectable, Inject } from '@angular/core';
 import { Effect, Actions } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import { defer } from 'rxjs/observable/defer';
+import { of } from 'rxjs/observable/of';
 
-import { COMMAND_TYPES, LoadAiAppsCommand, RegisterAiAppCommand, RemoveAiAppCommand } from '../actions/registrations/commands';
+import { COMMAND_TYPES, LoadAiAppsCommand, RegisterAiAppCommand, RemoveAiAppCommand, loadAiApps } from '../actions/registrations/commands';
 import { aiAppsLoaded, aiAppRegistered, aiAppRemoved } from '../actions/registrations/events';
 
 import { IRegistrationService, REGISTRATION_SERVICE } from '../services/registrations';
 import { ILogListRegistration } from '../state/index';
+import { Scheduler } from 'rxjs/Scheduler';
 
 @Injectable()
 export class RegistrationsEffects {

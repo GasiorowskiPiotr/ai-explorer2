@@ -41,11 +41,6 @@ export class ApplicationInsightsService implements IApplicationInsightsService {
                     }
                 });
             });
-
-            
-
-            
-
         });
     }
     

@@ -33,8 +33,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatListModule } from '@angular/material/list';
 
-const materialModules = [MatToolbarModule, MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatSlideToggleModule];
+const materialModules = [MatToolbarModule, MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatSlideToggleModule, MatListModule];
 
 // -------- My components
 import { RegistrationsComponent } from './components/registrations';
@@ -43,16 +44,24 @@ import { RegistrationItemComponent } from './components/registration-item';
 import { AiRegistrationComponent } from './components/ai-registration';
 import { RegistrationFormComponent } from './components/registration-form';
 import { LogsComponent } from './components/logs';
+import { LogsListComponent } from './components/logs-list';
 
-const aiExplorerComponent = [RegistrationsComponent, RegistrationsListComponent, RegistrationItemComponent, AiRegistrationComponent, RegistrationFormComponent, LogsComponent];
+const aiExplorerComponent = [RegistrationsComponent, RegistrationsListComponent, RegistrationItemComponent, AiRegistrationComponent, RegistrationFormComponent, LogsComponent, LogsListComponent];
 
 // -------- State
 import { ILogListRegistration, IExceptionEntry, ILogList } from './state';
 
+// -------- Pipes
+import { ToEntryTypeIconPipe } from './pipes/toEntryTypeIcon';
+import { ToTitlePipe } from './pipes/toTitle';
+
+const pipes = [ToEntryTypeIconPipe, ToTitlePipe];
+
 @NgModule({
   declarations: [
     AppComponent,
-    [...aiExplorerComponent]
+    [...aiExplorerComponent],
+    [...pipes]
   ],
   imports: [
     BrowserModule,
