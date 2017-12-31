@@ -9,13 +9,13 @@ export class ToEntryTypeIconPipe {
     transform(value: EntryTypes) {
         switch(value) {
             case EntryTypes.TRACE: {
-                return 'info';
+                return 'info_outline';
             }
             case EntryTypes.CUSTOM_EVENT: {
                 return 'check_circle'
             }
             case EntryTypes.PAGE_VIEW: {
-                return 'page_view';
+                return 'pageview';
             }
             case EntryTypes.BROWSER_TIMING: {
                 return 'alarm';

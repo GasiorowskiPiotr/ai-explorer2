@@ -33,7 +33,7 @@ export class ToTitlePipe {
                 return 'Availability Result';
             }
             default: {
-                return 'extension';
+                return value;
             }
         }
     }

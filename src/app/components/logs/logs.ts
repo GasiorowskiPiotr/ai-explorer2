@@ -27,7 +27,7 @@ export class LogsComponent implements OnInit {
                 .map(l => l.find(list => list.name === appName))
                 .filter(l => l != null)
                 .subscribe(l => {
-                    (this.logList = l);
+                    this.logList = l;
                 });
 
             this.store

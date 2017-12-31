@@ -54,8 +54,9 @@ import { ILogListRegistration, IExceptionEntry, ILogList } from './state';
 // -------- Pipes
 import { ToEntryTypeIconPipe } from './pipes/toEntryTypeIcon';
 import { ToTitlePipe } from './pipes/toTitle';
+import { ToEntryDescriptionPipe } from './pipes/toEntryDescription';
 
-const pipes = [ToEntryTypeIconPipe, ToTitlePipe];
+const pipes = [ToEntryTypeIconPipe, ToTitlePipe, ToEntryDescriptionPipe];
 
 @NgModule({
   declarations: [
