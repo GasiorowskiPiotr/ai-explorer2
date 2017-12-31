@@ -12,6 +12,7 @@ import { IApplicationState, ILogEntry } from '../../state';
 export class LogEntryComponent implements OnInit {
     
     private logEntry: ILogEntry;
+    private customDimensions: { key: string, value: any }[] = [];
 
     constructor(private activatedRoute: ActivatedRoute, private store: Store<IApplicationState>) {
 
@@ -30,8 +31,13 @@ export class LogEntryComponent implements OnInit {
                 .map(list => list.entries.find(entry => entry.id === eventId))
                 .subscribe(entry => {
                     this.logEntry = entry;
+                    this.customDimensions = Object
+                        .keys(this.logEntry.customDimensions)
+                        .map(key => ({ key, value: this.logEntry.customDimensions[key] }));
                 });
-        })
+
+            window.scrollTo(0, 0); // HACK: Need to change that!
+        });
     }
 
 }

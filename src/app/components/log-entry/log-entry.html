@@ -1,1 +1,17 @@
-LOG ENTRY
+<mat-card>
+    <mat-card-header>
+            <mat-card-title>{{logEntry.type | toTitle}} {{logEntry.operation ? logEntry.operation.name : ''}}</mat-card-title>
+            <mat-card-subtitle>{{logEntry.timestamp | date:'yyyy-MM-dd HH:mm:ss z'}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+            
+            <h3>{{logEntry.type | toTitle}}</h3>
+        
+            
+            <h3>Custom Dimensions</h3>
+            <div *ngFor="let dim of customDimensions">
+                <h4>{{dim.key}}</h4>
+                <p> {{dim.value}} </p>
+            </div>
+    </mat-card-content>
+</mat-card>
