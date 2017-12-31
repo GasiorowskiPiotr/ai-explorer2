@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { IApplicationState, ILogList, ILogListRegistration } from '../../state';
 import { loadLogs } from '../../actions/lists/commands';
@@ -19,7 +19,11 @@ export class LogsComponent implements OnInit {
 
     private app: ILogListRegistration;
 
-    constructor(private store: Store<IApplicationState>, private activeRoute: ActivatedRoute) {}
+    constructor(
+        private store: Store<IApplicationState>, 
+        private activeRoute: ActivatedRoute,
+        private router: Router
+    ) {}
 
     ngOnInit(): void {
         this.activeRoute.params.subscribe(params => {
@@ -51,6 +55,12 @@ export class LogsComponent implements OnInit {
             this.store.dispatch(loadLogs(this.app, { skip: this.logList.pager.skip + this.logList.pager.top, top: this.logList.pager.top }, this.logList.filter));
 
         }
+    }
+
+    public listEntrySelected($event: string) {
+        const eventId = $event;
+
+        this.router.navigateByUrl(`/logs/${this.app.name}/${eventId}`);
     }
 
 }

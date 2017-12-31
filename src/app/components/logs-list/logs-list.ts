@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { ILogEntry, EntryTypes } from '../../state';
 
 @Component({
@@ -6,14 +6,15 @@ import { ILogEntry, EntryTypes } from '../../state';
     templateUrl: './logs-list.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LogsListComponent implements OnChanges {
-    ngOnChanges(changes: SimpleChanges): void {
-        console.log(changes);
-    }
-
+export class LogsListComponent {
+    
     @Input() public entries: ILogEntry[];
-
-    @Output() public loadRequested: EventEmitter<boolean> = new EventEmitter();
+    
+    @Output() public selected: EventEmitter<string> = new EventEmitter(); 
 
     public entryId = (entry: ILogEntry) => entry.id;
+
+    public listItemSelected(entryId: string) {
+        this.selected.next(entryId);
+    }
 }

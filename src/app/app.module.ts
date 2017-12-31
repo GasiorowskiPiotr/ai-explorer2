@@ -45,8 +45,9 @@ import { AiRegistrationComponent } from './components/ai-registration';
 import { RegistrationFormComponent } from './components/registration-form';
 import { LogsComponent } from './components/logs';
 import { LogsListComponent } from './components/logs-list';
+import { LogEntryComponent } from './components/log-entry';
 
-const aiExplorerComponent = [RegistrationsComponent, RegistrationsListComponent, RegistrationItemComponent, AiRegistrationComponent, RegistrationFormComponent, LogsComponent, LogsListComponent];
+const aiExplorerComponent = [RegistrationsComponent, RegistrationsListComponent, RegistrationItemComponent, AiRegistrationComponent, RegistrationFormComponent, LogsComponent, LogsListComponent, LogEntryComponent];
 
 // -------- State
 import { ILogListRegistration, IExceptionEntry, ILogList } from './state';

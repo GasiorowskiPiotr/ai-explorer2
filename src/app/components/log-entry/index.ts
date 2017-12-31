@@ -1,0 +1,1 @@
+export { LogEntryComponent } from './log-entry';

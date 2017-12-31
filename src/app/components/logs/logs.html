@@ -1,2 +1,2 @@
-<logs-list [entries]="logList.entries"></logs-list>
+<logs-list [entries]="logList.entries" (selected)="listEntrySelected($event)"></logs-list>
 <button mat-button color="accent" (click)="loadMore()" >Load more...</button>
