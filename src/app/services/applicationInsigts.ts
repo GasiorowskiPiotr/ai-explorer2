@@ -35,7 +35,7 @@ export class ApplicationInsightsService implements IApplicationInsightsService {
                     results.push(...response.value);
                     pushCnt++;
 
-                    results = results.sort((a,b) => b.timestamp > a.timestamp ? -1 : 1 );
+                    results = results.sort((a,b) => b.timestamp > a.timestamp ? 1 : -1 );
                     if(pushCnt ===  urls.length) {
                         observer.next(results);
                     }

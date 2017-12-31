@@ -10,7 +10,13 @@ export function logsReducer(state: ILogList[], action: Action): ILogList[] {
 
             const list = state.find(l => l.name === evt.app.name) || { entries: [], name: evt.app.name, filter: evt.filter, pager: evt.pager };
 
-            const newList = {...list, ...{ entries: [...list.entries, ...evt.entries], pager: evt.pager, filter: evt.filter }};
+            let entries = [];
+            if(evt.pager.skip === 0 ) {
+                entries = [...evt.entries]
+            } else {
+                entries =  [...list.entries, ...evt.entries]
+            }
+            const newList = {...list, ...{ entries, pager: evt.pager, filter: evt.filter }};
 
             const currentIdx = state.findIndex(l => l.name === evt.app.name);
 
