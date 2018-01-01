@@ -59,10 +59,15 @@ import { ToEntryDescriptionPipe } from './pipes/toEntryDescription';
 
 const pipes = [ToEntryTypeIconPipe, ToTitlePipe, ToEntryDescriptionPipe];
 
+// -------- Dynamic components
+import { AvailabilityResultComponent, BrowserTimingComponent, CustomEventComponent, DependencyComponent, ExceptionComponent, PageViewComponent, RequestComponent, TraceComponent } from './components/log-entry';
+const dynamicComponents = [AvailabilityResultComponent, BrowserTimingComponent, CustomEventComponent, DependencyComponent, ExceptionComponent, PageViewComponent, RequestComponent, TraceComponent];
+
 @NgModule({
   declarations: [
     AppComponent,
     [...aiExplorerComponent],
+    [...dynamicComponents],
     [...pipes]
   ],
   imports: [
@@ -94,6 +99,9 @@ const pipes = [ToEntryTypeIconPipe, ToTitlePipe, ToEntryDescriptionPipe];
     provide: APPLICATION_INSIGHTS_SERVICE,
     useClass: ApplicationInsightsService
   }],
+  entryComponents: [
+    ...dynamicComponents
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
