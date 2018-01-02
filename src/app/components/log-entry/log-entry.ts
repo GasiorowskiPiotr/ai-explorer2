@@ -27,8 +27,8 @@ import { TraceComponent } from './trace';
 })
 export class LogEntryComponent implements OnInit, OnDestroy {
         
-    private logEntry: ILogEntry = { customDimensions: {}, id: '', operation: null, timestamp: new Date(), type: EntryTypes.TRACE };
-    private customDimensions: { key: string, value: any }[] = [];
+    public logEntry: ILogEntry = { customDimensions: {}, id: '', operation: null, timestamp: new Date(), type: EntryTypes.TRACE };
+    public customDimensions: { key: string, value: any }[] = [];
     private componentRef: ComponentRef<any>;
 
     @ViewChild("infoContainer", { read: ViewContainerRef }) public infoContainer: ViewContainerRef;

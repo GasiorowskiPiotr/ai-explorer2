@@ -1,5 +1,5 @@
 import { InjectionToken, Injectable } from '@angular/core';
-import { setItem, removeItem, getItem } from 'localforage';
+import * as storage from 'localforage';
 
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/observable/of';
@@ -23,25 +23,25 @@ export interface IRegistrationService {
 @Injectable()
 export class RegistrationService implements IRegistrationService {
     getAll = () =>
-        fromPromise(getItem<ILogListRegistration[]>(storageKey).then(res => {
+        fromPromise(storage.getItem<ILogListRegistration[]>(storageKey).then(res => {
             return res || [];
         }));
 
     register = (app: ILogListRegistration): Observable<any> =>
-        fromPromise(getItem(storageKey).then((items: ILogListRegistration[]) => {
+        fromPromise(storage.getItem(storageKey).then((items: ILogListRegistration[]) => {
             const entries = items || [];
             const newEntries = [...entries, app];
 
             return newEntries;
         }).then((newEntries: ILogListRegistration[]) => {
-            return setItem(storageKey, newEntries);
+            return storage.setItem(storageKey, newEntries);
         }));
     
     remove = (appId: string): Observable<{}> =>
-        fromPromise(getItem(storageKey).then((items: ILogListRegistration[])=> {
+        fromPromise(storage.getItem(storageKey).then((items: ILogListRegistration[])=> {
             return items.filter((i) => i.appId !== appId)
         }).then((newEntries: ILogListRegistration[]) => {
-            return setItem(storageKey, newEntries);
+            return storage.setItem(storageKey, newEntries);
         }));
 
 }

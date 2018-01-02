@@ -8,7 +8,8 @@
     "build": "ng build --prod -aot",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy": "xcopy /Y /E dist\\* ..\\ai-explorer2-dist\\ai-explorer2 && cd ..\\ai-explorer2-dist\\ai-explorer2 && git add . && git commit -am\"Next commit\" && git push origin master"
   },
   "private": true,
   "dependencies": {

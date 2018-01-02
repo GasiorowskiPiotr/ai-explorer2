@@ -89,8 +89,8 @@ const dynamicComponents = [AvailabilityResultComponent, BrowserTimingComponent, 
       }
     }),
     EffectsModule.forRoot([RegistrationsEffects, LogsEffects]),
-    [...materialModules],
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
+    [...materialModules]/*,
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })*/
   ],
   providers: [{
     provide: REGISTRATION_SERVICE,
