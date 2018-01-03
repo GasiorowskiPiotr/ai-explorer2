@@ -1,13 +1,19 @@
 <mat-card>
     <mat-card-title-group>
         <mat-card-title>{{item.registration.name}}</mat-card-title>
-        <mat-card-subtitle>{{item.registration.appId}}</mat-card-subtitle>
+        <!--<mat-card-subtitle>{{item.registration.appId}}</mat-card-subtitle>-->
     </mat-card-title-group>
     <mat-card-content>
         <span *ngIf="item.exceptions">
             <button mat-button color="warn" (click)="exploreExceptions()">
                 <mat-icon>lightbulb_outline</mat-icon>
                 Exceptions (last 24h): {{item.exceptions.exceptionsCount}}
+            </button>
+        </span>
+        <span *ngIf="!item.exceptions">
+            <button mat-button color="warn" (click)="exploreExceptions()">
+                <mat-icon>lightbulb_outline</mat-icon>
+                Explore exceptions
             </button>
         </span>
     </mat-card-content>
