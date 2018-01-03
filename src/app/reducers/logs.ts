@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 import { ILogList } from '../state'
 import { EVENT_TYPES, LogsLoadedEvent } from '../actions/lists/events';
 
-export function logsReducer(state: ILogList[], action: Action): ILogList[] {
+export function logsReducer(state: ILogList[] = [], action: Action): ILogList[] {
 
     switch(action.type) {
         case EVENT_TYPES.LOGS_LOADED: {

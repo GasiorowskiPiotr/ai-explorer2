@@ -30,7 +30,7 @@ export class LogsComponent implements OnInit {
             var appName = params.name;
 
             this.store
-                .select(s => s.lists)
+                .select(s => s.lists || [])
                 .map(l => l.find(list => list.name === appName))
                 .filter(l => l != null)
                 .subscribe(l => {

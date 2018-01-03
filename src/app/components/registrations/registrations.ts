@@ -25,7 +25,8 @@ export class RegistrationsComponent implements OnInit {
         const exceptions = this.store.select(s => s.exceptions);
 
         Observable.combineLatest(registrations, exceptions, (regs, excs) => ([
-            ...regs.map((reg) => ({
+
+            ...(regs||[]).map((reg) => ({
                 registration: reg,
                 exceptions: (excs || []).find((e) => e.appId === reg.appId)
             }))

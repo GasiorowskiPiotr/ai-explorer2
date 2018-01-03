@@ -32,5 +32,7 @@ export const aiAppRegistered = (name: string, appId: string, appKey: string, loa
 export const aiAppRemoved = (appId: string): AiAppRemovedEvent =>
     new AiAppRemovedEvent(appId);
 
-export const aiAppsLoaded = (aiApps: ILogListRegistration[]): AiAppsLoadedEvent =>
-    new AiAppsLoadedEvent(aiApps);
+export const aiAppsLoaded = (aiApps: ILogListRegistration[]): AiAppsLoadedEvent => {
+    console.log(aiApps);
+    return new AiAppsLoadedEvent(aiApps);
+}
