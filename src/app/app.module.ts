@@ -26,6 +26,7 @@ import { StoreModule } from '@ngrx/store';
 import { registrationsReducer } from './reducers/registrations';
 import { exceptionsReducer } from './reducers/exceptions';
 import { logsReducer } from './reducers/logs';
+import { uiReducer } from './reducers/ui';
 
 // -------- Material modules
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -35,8 +36,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatListModule } from '@angular/material/list';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-const materialModules = [MatToolbarModule, MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatSlideToggleModule, MatListModule];
+const materialModules = [MatToolbarModule, MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatSlideToggleModule, MatListModule, MatProgressSpinnerModule];
 
 // -------- My components
 import { RegistrationsComponent } from './components/registrations';
@@ -51,7 +53,7 @@ import { LogEntryComponent } from './components/log-entry';
 const aiExplorerComponent = [RegistrationsComponent, RegistrationsListComponent, RegistrationItemComponent, AiRegistrationComponent, RegistrationFormComponent, LogsComponent, LogsListComponent, LogEntryComponent];
 
 // -------- State
-import { ILogListRegistration, IExceptionEntry, ILogList } from './state';
+import { ILogListRegistration, IExceptionEntry, ILogList, IUIState } from './state';
 
 // -------- Pipes
 import { ToEntryTypeIconPipe } from './pipes/toEntryTypeIcon';
@@ -81,12 +83,14 @@ const dynamicComponents = [AvailabilityResultComponent, BrowserTimingComponent, 
     StoreModule.forRoot({
       registrations: registrationsReducer,
       exceptions: exceptionsReducer,
-      lists: logsReducer
+      lists: logsReducer,
+      ui: uiReducer
     }, {
       initialState: {
         exceptions: new Array<IExceptionEntry>(),
         registrations: new Array<ILogListRegistration>(),
-        lists: new Array<ILogList>()
+        lists: new Array<ILogList>(),
+        ui: <IUIState>{ loading: false, errorMessage: '' }
       }
     }),
     EffectsModule.forRoot([RegistrationsEffects, LogsEffects, ExceptionsEffects]),

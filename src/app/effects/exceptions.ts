@@ -11,18 +11,24 @@ import { COMMAND_TYPES, LoadExceptionsCommand } from '../actions/exceptions/comm
 
 import { IApplicationInsightsService, APPLICATION_INSIGHTS_SERVICE } from '../services/applicationInsigts';
 import { exceptionsLoaded } from '../actions/exceptions/events';
+import { loadingStarted, loadingSucceeded } from '../actions/ui/events';
 
 @Injectable()
 export class ExceptionsEffects {
 
     @Effect() load$: Observable<Action> = 
         this.actions$.ofType(COMMAND_TYPES.LOAD_EXCEPTIONS)
-            .mergeMap((action: LoadExceptionsCommand) => 
-                this.aiService.getExceptionCounts(action.registrations)
-                    .map((entries) => {
-                        return exceptionsLoaded(entries);
-                    })
-            );
+            .mergeMap((action: LoadExceptionsCommand) => {
+                return Observable.create((observer) => {
+                    observer.next(loadingStarted());
+                    this.aiService.getExceptionCounts(action.registrations)
+                    .subscribe((entries) => {
+                        observer.next(exceptionsLoaded(entries));
+                        observer.next(loadingSucceeded());
+                        observer.complete();
+                    });
+                });
+            });
 
     constructor(
         private actions$: Actions,

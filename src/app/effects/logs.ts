@@ -10,23 +10,28 @@ import { Observable } from 'rxjs/Observable';
 import { COMMAND_TYPES, LoadLogsCommand } from '../actions/lists/commands';
 
 import { IApplicationInsightsService, APPLICATION_INSIGHTS_SERVICE } from '../services/applicationInsigts';
-import { logsLoaded } from '../actions/lists/events/index';
+import { logsLoaded } from '../actions/lists/events';
+import { loadingStarted, loadingSucceeded } from '../actions/ui/events';
 
 @Injectable()
 export class LogsEffects {
 
     @Effect() load$: Observable<Action> = 
         this.actions$.ofType(COMMAND_TYPES.LOAD_LOGS)
-            .mergeMap((action: LoadLogsCommand) => 
-                this.aiService.load(
-                    action.app, 
-                    action.filter, 
-                    action.pager)
-                .map((entries) => {
-                    return logsLoaded(entries, action.app, action.pager, action.filter);
-                }
-                    )
-            );
+            .mergeMap((action: LoadLogsCommand) => {
+                return Observable.create(observer => {
+                    observer.next(loadingStarted());
+                    this.aiService.load(
+                        action.app, 
+                        action.filter, 
+                        action.pager)
+                    .subscribe((entries) => {
+                        observer.next(logsLoaded(entries, action.app, action.pager, action.filter));
+                        observer.next(loadingSucceeded());
+                        observer.complete();
+                    });
+                });
+            });
 
     constructor(
         private actions$: Actions,

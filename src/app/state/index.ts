@@ -4,6 +4,7 @@ export interface IApplicationState {
     registrations: ILogListRegistration[];
     lists: ILogList[];
     exceptions: IExceptionEntry[];
+    ui: IUIState;
 }
 
 export interface ILogListRegistration {
@@ -121,4 +122,9 @@ export enum EntryTypes {
     DEPENDENCY = 'dependency',
     EXCEPTION = 'exception',
     AVAILABILITY_RESULT = 'availabilityResult'
+}
+
+export interface IUIState {
+    loading: boolean;
+    errorMessage: string;
 }
