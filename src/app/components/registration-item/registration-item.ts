@@ -13,6 +13,7 @@ export class RegistrationItemComponent {
 
     @Output() public removeRequested: EventEmitter<string> = new EventEmitter();
     @Output() public exploreRequested: EventEmitter<string> = new EventEmitter();
+    @Output() public exploreExceptionsRequested: EventEmitter<string> = new EventEmitter();
 
     public remove() {
         this.removeRequested.next(this.item.registration.appId);
@@ -20,5 +21,9 @@ export class RegistrationItemComponent {
 
     public explore() {
         this.exploreRequested.next(this.item.registration.name);
+    }
+
+    public exploreExceptions() {
+        this.exploreExceptionsRequested.next(this.item.registration.appId);
     }
 }

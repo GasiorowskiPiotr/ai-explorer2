@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { IApplicationState, ILogList, ILogListRegistration } from '../../state';
+import { IApplicationState, ILogList, ILogListRegistration, FilterTypes, FilterTimeSpans } from '../../state';
 import { loadLogs } from '../../actions/lists/commands';
 
 import 'rxjs/add/operator/map';
@@ -26,6 +26,7 @@ export class LogsComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
+        
         this.activeRoute.params.subscribe(params => {
             var appName = params.name;
 
@@ -43,7 +44,12 @@ export class LogsComponent implements OnInit {
                 .filter(l => l != null)
                 .subscribe(r => {
                     this.app = r;
-                    this.store.dispatch(loadLogs(r))
+                    if(this.activeRoute.snapshot.queryParams['onlyExceptions']) {
+                        this.store.dispatch(loadLogs(r, { skip: 0, top: 100 }, { query: '', time: FilterTimeSpans.DAY, types: [FilterTypes.EXCEPTIONS] }));
+                    } else {
+                        this.store.dispatch(loadLogs(r))
+                    }
+                    
                 });
         });
         

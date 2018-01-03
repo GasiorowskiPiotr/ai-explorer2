@@ -19,7 +19,7 @@ export class RegistrationFormComponent {
             name: ['', [Validators.required]],
             appId: ['', [Validators.required]],
             appKey: ['', [Validators.required]],
-            loadExceptions: ['']
+            loadExceptions: [false]
         });
      }
 

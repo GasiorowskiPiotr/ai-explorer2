@@ -12,6 +12,7 @@ export class RegistrationsListComponent {
 
     @Output() public removeAppRequested: EventEmitter<string> = new EventEmitter();
     @Output() public exploreLogsRequested: EventEmitter<string> = new EventEmitter();
+    @Output() public exploreExceptionsRequested: EventEmitter<string> = new EventEmitter();
 
     onRemoveRequested($event: string) {
         const appId: string = $event;
@@ -23,6 +24,12 @@ export class RegistrationsListComponent {
         const appName: string = $event;
 
         this.exploreLogsRequested.next(appName);
+    }
+
+    onExploreExceptionsRequested($event: string) {
+        const appId: string = $event;
+
+        this.exploreExceptionsRequested.next(appId);
     }
 
 }

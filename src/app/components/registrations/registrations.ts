@@ -6,7 +6,8 @@ import 'rxjs/add/observable/combineLatest';
 import { Observable } from 'rxjs/Observable';
 
 import { IApplicationState, ILogListRegistration, IExceptionEntry } from '../../state';
-import { removeAiApp } from '../../actions/registrations/commands'
+import { removeAiApp } from '../../actions/registrations/commands';
+import { loadExceptions } from '../../actions/exceptions/commands';
 
 @Component({
     selector: 'registrations',
@@ -46,6 +47,14 @@ export class RegistrationsComponent implements OnInit {
         const appName = $event;
 
         this.router.navigate(['logs', appName]);
+    }
+
+    onExploreExceptionsRequested($event: string) {
+        const appId = $event;
+
+        const registration = this.registrations.find(r => r.registration.appId === appId);
+
+        this.router.navigateByUrl(`/logs/${registration.registration.name}?onlyExceptions=true`);
     }
 
 }

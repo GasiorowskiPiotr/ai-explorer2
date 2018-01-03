@@ -1,5 +1,5 @@
 <registration-item *ngFor="let item of items" [item]="item" 
     (removeRequested)="onRemoveRequested($event)" 
-    (exploreRequested)="onExploreRequested($event)">
-
+    (exploreRequested)="onExploreRequested($event)"
+    (exploreExceptionsRequested)="onExploreExceptionsRequested($event)">
 </registration-item>

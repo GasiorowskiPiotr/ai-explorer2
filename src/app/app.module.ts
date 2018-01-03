@@ -19,6 +19,7 @@ import { APPLICATION_INSIGHTS_SERVICE, ApplicationInsightsService } from './serv
 import { EffectsModule } from '@ngrx/effects';
 import { RegistrationsEffects } from './effects/registrations';
 import { LogsEffects } from './effects/logs';
+import { ExceptionsEffects } from './effects/exceptions';
 
 // -------- Store
 import { StoreModule } from '@ngrx/store';
@@ -88,7 +89,7 @@ const dynamicComponents = [AvailabilityResultComponent, BrowserTimingComponent, 
         lists: new Array<ILogList>()
       }
     }),
-    EffectsModule.forRoot([RegistrationsEffects, LogsEffects]),
+    EffectsModule.forRoot([RegistrationsEffects, LogsEffects, ExceptionsEffects]),
     [...materialModules]/*,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })*/
   ],

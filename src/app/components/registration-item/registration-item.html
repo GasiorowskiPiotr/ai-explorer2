@@ -4,15 +4,11 @@
         <mat-card-subtitle>{{item.registration.appId}}</mat-card-subtitle>
     </mat-card-title-group>
     <mat-card-content>
-        <span>
-            <mat-icon>lightbulb_outline
-            </mat-icon>
-        </span>
         <span *ngIf="item.exceptions">
-            Exceptions: {{item.exceptions.exceptionsCount}}
-        </span>
-        <span *ngIf="!item.exceptions">
-            Exceptions: N/A
+            <button mat-button color="warn" (click)="exploreExceptions()">
+                <mat-icon>lightbulb_outline</mat-icon>
+                Exceptions (last 24h): {{item.exceptions.exceptionsCount}}
+            </button>
         </span>
     </mat-card-content>
     <mat-card-actions>

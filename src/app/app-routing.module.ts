@@ -12,7 +12,7 @@ const routes: Routes = [{
   path: 'register', component: AiRegistrationComponent
 }, {
   path: 'logs/:name/:eventId', component: LogEntryComponent
-},{
+}, {
   path: 'logs/:name', component: LogsComponent
 }];
 

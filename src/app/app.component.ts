@@ -21,8 +21,9 @@ export class AppComponent implements OnInit {
 
       if(regs) {
         var toLoad = regs.filter(r => r.loadExceptions);
-
-        this.store.dispatch(loadExceptions(toLoad));
+        
+        if(toLoad && toLoad.length > 0)
+          this.store.dispatch(loadExceptions(toLoad));
       }
     })
 
