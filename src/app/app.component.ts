@@ -15,7 +15,7 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 })
 export class AppComponent implements OnInit {
 
-  private ui: IUIState = { loading: false, errorMessage: '' };
+  ui: IUIState = { loading: false, errorMessage: '' };
 
   @ViewChild('loader') private spinner: MatProgressSpinner;
 
